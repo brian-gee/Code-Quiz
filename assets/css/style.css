@@ -1,0 +1,32 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.hero {
+    padding: 2rem;
+}
+
+.top-left {
+    color: red;
+    display: inline;
+}
+
+.top-right {
+    display: inline;
+    float: right;
+}
+
+.main {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10rem;
+    margin-right: 10rem;
+}
+
+.main h1 {
+    font-size: 3rem;
+}
