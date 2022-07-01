@@ -11,6 +11,8 @@
 .top-left {
     color: red;
     display: inline;
+    position: fixed;
+    text-decoration: none;
 }
 
 .top-right {
@@ -23,10 +25,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     margin-left: 10rem;
     margin-right: 10rem;
 }
 
 .main h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
+}
+
+.main h4 {
+    font-size: 1rem;
 }
