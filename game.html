@@ -16,12 +16,15 @@
     </header>
 
     <div class="container">
-        <div id="home" class="flex-column flex-center">
-            <h1>Coding Quiz Challenge</h1>
-            <h3>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</h3>
-            <a href="./game.html" class="btn">Play</a>
-            <a href="./highscores.html" id="highscore-btn" class="btn">High Scores</a>
+        <div id="game" class="justify-center flex-column">
+            <div id="question"><h1>What is the answer to this question?</h1></div>
+            <div class="choice-container">
+                <p class="choice-prefix">A</p>
+                <p class="choice-text" data-number>Choice</p>
+            </div>
         </div>
     </div>
+    
+   <script src="./assets/js/script.js"></script>
 </body>
 </html>
