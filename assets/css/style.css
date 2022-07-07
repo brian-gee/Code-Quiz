@@ -1,3 +1,4 @@
+/* General Styling */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,6 +6,7 @@
     font-size: 62.5%;
 }
 
+/* Nav styling */
 .hero {
     padding: 0 5rem;
 }
@@ -99,5 +101,42 @@ a {
     cursor: not-allowed;
     box-shadow: none;
     transform: none;
+}
+
+/* Game styling */
+.choice-container {
+    display: flex;
+    margin-bottom: 1rem;
+    width: 100%;
+    border-radius: 25px;
+    background: rgb(183, 255, 248);
+    font-size: 3rem;
+    min-width: 80rem;
+}
+
+.choice-container:hover {
+    cursor: pointer;
+    box-shadow: 0 0.4rem 1.4rem 0 rgb(183, 255, 248);
+    transform: scale(1.02);
+    transform: transform 150ms;
+}
+
+.choice-prefix {
+    font-weight: bold;
+    padding: 2rem 2.5rem;
+}
+
+.choice-text {
+    font-weight: bold;
+    padding: 2rem;
+    width: 100%;
+}
+
+.correct {
+    background: green;
+}
+
+.incorrect {
+    background: red;
 }
 
