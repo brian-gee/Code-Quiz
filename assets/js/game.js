@@ -54,7 +54,7 @@ startGame = () => {
     score = 0;
     availableQuestions = [...questions];
     time = 60;
-    startTimer(time);
+    startTimer();
     getNewQuestion();
 }
 
@@ -108,12 +108,13 @@ CHOICES.forEach(choice => {
     })
 })
 
-startTimer = time => {
+// Start countdown timer for quiz
+startTimer = () => {
     timer = setInterval(countdown, 1000);
 }
 
+// Display time remaining and countdown from time
 countdown = () => {
-    console.log(time);
     TIMER.textContent = ("Time: " + time);
     time--;
     if (time < 0) {
