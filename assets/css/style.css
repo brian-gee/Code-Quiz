@@ -26,6 +26,7 @@
     float: right;
 }
 
+/* Main styling */
 h1 {
     font-size: 5.4rem;
     margin-bottom: 5rem;
@@ -47,7 +48,7 @@ a {
 
 .container {
     width: 100vw;
-    height: 100vh;
+    height: 65vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -132,12 +133,14 @@ a {
     width: 100%;
 }
 
-.correct {
-    background: green;
-}
-
-.incorrect {
-    background: red;
+#correct, #incorrect {
+    opacity: 0.5;
+    border-top: 2px solid grey;
+    color: grey;
+    max-width: 80rem;
+    margin: 50px auto;
+    font-style: italic;
+    font-size: 3rem;
 }
 
 /* Highscore Styling */

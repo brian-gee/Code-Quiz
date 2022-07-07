@@ -1,12 +1,15 @@
-const QUESTION = document.querySelector('#question');
-const CHOICES = Array.from(document.querySelectorAll('.choice-text'));
+const QUESTION = document.querySelector("#question");
+const CORRECT = document.querySelector("#correct")
+const INCORRECT = document.querySelector("#incorrect")
+const TIMER = document.querySelector("#timer")
+const CHOICES = Array.from(document.querySelectorAll(".choice-text"));
 const SCORE_POINTS = 100;
 const MAX_QUESTIONS = 4;
-const TIME = 120;
 
 let currentQuestion = {};
 let acceptingAnswers = true;
 let score = 0;
+let time = 0;
 let questionCounter = 0;
 let availableQuestions = [];
 
@@ -45,69 +48,90 @@ let questions = [
     }
 ];
 
-
+// Runs when game is started
 startGame = () => {
-    questionCounter = 0
-    score = 0
-    availableQuestions = [...questions]
-    getNewQuestion()
+    questionCounter = 0;
+    score = 0;
+    availableQuestions = [...questions];
+    time = 60;
+    startTimer(time);
+    getNewQuestion();
 }
 
+// Run on startGame and after each question is answered to get new question
 getNewQuestion = () => {
-    if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
-        localStorage.setItem('mostRecentScore', score)
+    if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS || time === 0) {
+        localStorage.setItem("mostRecentScore", score);
 
-        return window.location.assign('./end.html')
+        return window.location.assign("./end.html");
     }
 
-    questionCounter++
+    questionCounter++;
     
-    const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
-    currentQuestion = availableQuestions[questionsIndex]
-    QUESTION.innerText = currentQuestion.question
+    const questionsIndex = Math.floor(Math.random() * availableQuestions.length);
+    currentQuestion = availableQuestions[questionsIndex];
+    QUESTION.innerText = currentQuestion.question;
 
     CHOICES.forEach(choice => {
-        const number = choice.dataset['number']
-        choice.innerText = currentQuestion['choice' + number]
+        const number = choice.dataset["number"];
+        choice.innerText = currentQuestion["choice" + number];
     })
 
-    availableQuestions.splice(questionsIndex, 1)
+    availableQuestions.splice(questionsIndex, 1);
 
-    acceptingAnswers = true
+    acceptingAnswers = true;
 }
 
+// Logic for handling answer selection
 CHOICES.forEach(choice => {
-    choice.addEventListener('click', e => {
-        if(!acceptingAnswers) return
+    choice.addEventListener("click", e => {
+        if(!acceptingAnswers) return;
 
-        acceptingAnswers = false
-        const selectedChoice = e.target
-        const selectedAnswer = selectedChoice.dataset['number']
+        acceptingAnswers = false;
+        const selectedChoice = e.target;
+        const selectedAnswer = selectedChoice.dataset["number"];
 
-        let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect'
+        let classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
 
-        if(classToApply === 'correct') {
-            incrementScore(SCORE_POINTS)
+        if(classToApply === "correct") {
+            incrementScore(SCORE_POINTS);
+            CORRECT.classList.remove("hidden");
+            setTimeout(() => { CORRECT.classList.add("hidden"); }, 1500);
+
         } else {
-
+            decrementTime();
+            INCORRECT.classList.remove("hidden");
+            setTimeout(() => { INCORRECT.classList.add("hidden"); }, 1500);
         }
 
-        selectedChoice.parentElement.classList.add(classToApply)
-
-        setTimeout(() => {
-            selectedChoice.parentElement.classList.remove(classToApply)
-            getNewQuestion()
-
-        }, 1000)
+        setTimeout(() => { getNewQuestion(); }, 500);
     })
 })
 
-incrementScore = num => {
-    score += num
+startTimer = time => {
+    timer = setInterval(countdown, 1000);
 }
 
-decrementScore = num => {
-    score -= num
+countdown = () => {
+    console.log(time);
+    TIMER.textContent = ("Time: " + time);
+    time--;
+    if (time < 0) {
+    TIMER.textContent = ("Time: 0");
+    clearInterval(timer)
+    localStorage.setItem("mostRecentScore", score);
+    return window.location.assign("./end.html");
+    }
+}
+
+// Increases user score when answer is correct
+incrementScore = num => {
+    score += num;
+}
+
+// Lowers remaining time when answer is wrong
+decrementTime = () => {
+    time -= 10;
 }
 
 startGame()
